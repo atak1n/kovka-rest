@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from .models import Product, Category
+from versatileimagefield.serializers import VersatileImageFieldSerializer
+
+from .models import (Product, Category, Image)
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -14,4 +16,5 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
+
 
