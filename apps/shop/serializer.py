@@ -18,3 +18,14 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ImageSerializer(serializers.ModelSerializer):
+    image = VersatileImageFieldSerializer(
+        sizes=[
+            ('full_size', 'url'),
+            ('thumbnail', 'thumbnail__100x100'),
+        ]
+    )
+
+    class Meta:
+        model = Image
+        fields = ['id', 'name', 'image']
