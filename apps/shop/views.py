@@ -1,52 +1,59 @@
-from rest_framework import viewsets, generics, mixins
+from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
+from rest_framework.generics import (RetrieveUpdateDestroyAPIView, get_object_or_404, ListCreateAPIView)
+from rest_framework.permissions import (
+    AllowAny,
+    IsAdminUser,
+    IsAuthenticated,
+    IsAuthenticatedOrReadOnly,
+)
 
 from .models import Category, Product, Image
 from .serializer import CategorySerializer, ProductSerializer, ImageSerializer
-from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
+from .permissions import IsReadOnlyOrAdmin
 
 
-class CategoryViewSet(viewsets.ModelViewSet):
+class CategoryViewSet(ModelViewSet):
 
     permission_classes = (AllowAny,)
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
 
 
-class ProductViewSet(viewsets.ReadOnlyModelViewSet):
+class ProductViewSet(ReadOnlyModelViewSet):
 
     permission_classes = (AllowAny,)
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
 
 
-class ImageViewSet(viewsets.ReadOnlyModelViewSet):
+class ImageViewSet(ReadOnlyModelViewSet):
 
     permission_classes = (AllowAny,)
     serializer_class = ImageSerializer
     queryset = Image.objects.all()
 
 
-class ProductSingleView(generics.RetrieveUpdateDestroyAPIView):
+class ProductSingleView(RetrieveUpdateDestroyAPIView):
 
-    # permission_classes = (IsAuthenticated, IsAdminUser)
+    permission_classes = (AllowAny,)
 
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
     def perform_update(self, serializer):
-        category = generics.get_object_or_404(Category, id=self.request.data.get('category_id'))
+        category = get_object_or_404(Category, id=self.request.data.get('category'))
         return serializer.save(category=category)
 
 
-class ProductView(generics.ListCreateAPIView):
+class ProductView(ListCreateAPIView):
 
-    # permission_classes = (IsAuthenticated, IsAdminUser)
+    permission_classes = (IsReadOnlyOrAdmin,)
 
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
     def perform_create(self, serializer):
-        category = generics.get_object_or_404(Category, id=self.request.POST.get('category_id'))
+        category = get_object_or_404(Category, id=self.request.data.get('category'))
         return serializer.save(category=category)
 
 
