@@ -49,3 +49,5 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+
+# TODO: добавить или разобраться с https://github.com/shellfly/django-vote
