@@ -9,7 +9,6 @@ from .views import (
     ProductSingleView,
 )
 
-
 app_name = 'shop'
 
 router = DefaultRouter()

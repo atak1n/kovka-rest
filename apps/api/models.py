@@ -29,25 +29,24 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
-    name = models.CharField(max_length=200, db_index=True)
+    category = models.ManyToManyField(Category, related_name='products')
+    title = models.CharField('название', max_length=200, db_index=True)
+    description = models.TextField('описание', blank=True)
+    image = models.ManyToManyField(Image, verbose_name='картинки', related_name='images')
+    price = models.DecimalField('цена', max_digits=10, decimal_places=2)
+
     # slug = models.SlugField(max_length=200, db_index=True)
-    image = models.ManyToManyField(Image, related_name='products')
-    description = models.TextField(blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
     # stock = models.PositiveIntegerField()
     # available = models.BooleanField(default=True)
     # created = models.DateTimeField(auto_now_add=True)
     # updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('title',)
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
         # index_together = (('id', 'slug'),)
 
     def __str__(self):
-        return self.name
+        return self.title
 
-
-# TODO: добавить или разобраться с https://github.com/shellfly/django-vote

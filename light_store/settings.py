@@ -42,8 +42,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'versatileimagefield',
+    # 'vote',
 
-    'apps.shop',
+    'apps.api',
+    # 'apps.handcraft',
 ]
 
 MIDDLEWARE = [
@@ -138,15 +140,7 @@ REST_FRAMEWORK = {
         # 'rest_framework.permissions.AllowAny',
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
         # 'rest_framework.permissions.IsAuthenticated',
-
     ),
-    # 'PAGE_SIZE': 10,
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #     # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    #     # 'rest_framework.authentication.TokenAuthentication',
-    #     'rest_framework.authentication.BasicAuthentication',
-    #     'rest_framework.authentication.SessionAuthentication',
-    # ),
 }
 
 
