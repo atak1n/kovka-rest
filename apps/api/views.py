@@ -2,9 +2,9 @@ from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 from rest_framework.generics import (RetrieveUpdateDestroyAPIView, get_object_or_404, ListCreateAPIView)
 from rest_framework.permissions import (
     AllowAny,
-    IsAdminUser,
-    IsAuthenticated,
-    IsAuthenticatedOrReadOnly,
+    # IsAdminUser,
+    # IsAuthenticated,
+    # IsAuthenticatedOrReadOnly,
 )
 
 from .models import Category, Product, Image
