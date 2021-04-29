@@ -4,13 +4,15 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
-djangorestframework = "*"
+django = "==3.2"
+djangorestframework = "==3.12.4"
 django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
-pillow = "*"
+pillow = "==8.2.0"
 django-versatileimagefield = "*"
 django-vote = "*"
+asgiref = "==3.3.4"
+pyjwt = "==2.1.0"
 
 [dev-packages]
 
