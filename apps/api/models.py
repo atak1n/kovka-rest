@@ -16,6 +16,7 @@ class Image(models.Model):
 
 
 class Category(models.Model):
+    """Категория товаров"""
     name = models.CharField(max_length=200, db_index=True)
     # slug = models.SlugField(max_length=200, db_index=True, unique=True)
 
@@ -28,7 +29,13 @@ class Category(models.Model):
         return self.name
 
 
+class ProductType(models.Model):
+    """Тип продуктов"""
+    pass
+
+
 class Product(models.Model):
+    """Продукты"""
     category = models.ManyToManyField(Category, related_name='products')
     title = models.CharField('название', max_length=200, db_index=True)
     description = models.TextField('описание', blank=True)
