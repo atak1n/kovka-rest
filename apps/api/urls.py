@@ -9,7 +9,7 @@ from .views import (
     ProductSingleView,
 )
 
-app_name = 'shop'
+app_name = 'api'
 
 router = DefaultRouter()
 router.register(r'categories', CategoryViewSet, basename='categories')
