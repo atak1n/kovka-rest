@@ -19,7 +19,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
 
-    image = ImageSerializer
+    image = ImageSerializer()
 
     class Meta:
         model = Product
@@ -29,10 +29,11 @@ class ProductSerializer(serializers.ModelSerializer):
 class ProductTypeSerializer(serializers.ModelSerializer):
 
     image = ImageSerializer()
+    products = ProductSerializer(many=True)
 
     class Meta:
         model = ProductType
-        fields = '__all__'
+        fields = ('id', 'title', 'slug', 'category', 'image', 'products')
 
 
 class CategoryProductTypesSerializer(serializers.ModelSerializer):

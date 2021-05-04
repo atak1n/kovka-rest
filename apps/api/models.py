@@ -84,7 +84,7 @@ class Product(models.Model):
         blank=True,
         null=True
     )
-    price = models.DecimalField('цена', max_digits=10, decimal_places=2)
+    # price = models.DecimalField('цена', max_digits=10, decimal_places=2)
 
     # slug = models.SlugField(max_length=200, db_index=True)
     # stock = models.PositiveIntegerField()

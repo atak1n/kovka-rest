@@ -13,6 +13,7 @@ django-versatileimagefield = "*"
 django-vote = "*"
 asgiref = "==3.3.4"
 pyjwt = "==2.1.0"
+django-debug-toolbar = "*"
 
 [dev-packages]
 

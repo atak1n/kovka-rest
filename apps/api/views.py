@@ -71,7 +71,12 @@ class ProductView(ListCreateAPIView):
 
 class CategoryListView(ListAPIView):
     """Список категория с типами продуктов"""
-    queryset = Category.objects.all()
+    queryset = Category.objects.all().prefetch_related(
+        'product_types',
+        'product_types__image',
+        'product_types__products',
+        'product_types__products__image',
+    )
     serializer_class = CategoryProductTypesSerializer
 
 

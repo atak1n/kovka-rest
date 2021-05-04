@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'versatileimagefield',
     # 'vote',
+    'debug_toolbar',
 
     'apps.api',
     # 'apps.handcraft',
@@ -50,6 +51,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -160,4 +164,8 @@ CORS_ALLOW_METHODS = [
 
 CSRF_TRUSTED_ORIGINS = [
     '*',
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
 ]
