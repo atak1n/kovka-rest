@@ -3,7 +3,8 @@ from rest_framework.generics import (
     get_object_or_404,
     RetrieveUpdateDestroyAPIView,
     ListCreateAPIView,
-    ListAPIView
+    ListAPIView,
+    RetrieveAPIView,
 )
 
 from rest_framework.permissions import (
@@ -21,7 +22,6 @@ from .serializer import (
     ImageSerializer,
     ProductTypeSerializer
 )
-from .permissions import IsReadOnlyOrAdmin
 
 
 class CategoryViewSet(ModelViewSet):
@@ -75,9 +75,33 @@ class CategoryListView(ListAPIView):
     serializer_class = CategoryProductTypesSerializer
 
 
+class CategoryDetail(RetrieveAPIView):
+    """Детализация категории вместе с типами продуктов и продуктами"""
+    queryset = ProductType.objects.all()
+    serializer_class = CategoryProductTypesSerializer
+
+
 class ProductTypeListView(ListAPIView):
 
     queryset = ProductType.objects.all()
     serializer_class = ProductTypeSerializer
+
+
+class ProductTypeDetail(RetrieveAPIView):
+
+    queryset = ProductType.objects.all()
+    serializer_class = ProductSerializer
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        # filter = {}
+        # for field in self.multiple_lookup_fields:
+        #     filter[field] = self.kwargs[field]
+
+        obj = get_object_or_404(queryset, id=self.request.data.get('pk'))
+        obj.select_related('')
+        return obj
+
+
 
 
