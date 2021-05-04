@@ -1,5 +1,11 @@
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
-from rest_framework.generics import (RetrieveUpdateDestroyAPIView, get_object_or_404, ListCreateAPIView)
+from rest_framework.generics import (
+    get_object_or_404,
+    RetrieveUpdateDestroyAPIView,
+    ListCreateAPIView,
+    ListAPIView
+)
+
 from rest_framework.permissions import (
     AllowAny,
     # IsAdminUser,
@@ -7,14 +13,20 @@ from rest_framework.permissions import (
     # IsAuthenticatedOrReadOnly,
 )
 
-from .models import Category, Product, Image
-from .serializer import CategorySerializer, ProductSerializer, ImageSerializer
+from .models import Category, Product, Image, ProductType
+from .serializer import (
+    CategoryProductTypesSerializer,
+    CategorySerializer,
+    ProductSerializer,
+    ImageSerializer,
+    ProductTypeSerializer
+)
 from .permissions import IsReadOnlyOrAdmin
 
 
 class CategoryViewSet(ModelViewSet):
 
-    permission_classes = (AllowAny,)
+    # permission_classes = (AllowAny,)
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
 
@@ -28,7 +40,7 @@ class ProductViewSet(ReadOnlyModelViewSet):
 
 class ImageViewSet(ReadOnlyModelViewSet):
 
-    permission_classes = (AllowAny,)
+    # permission_classes = (AllowAny,)
     serializer_class = ImageSerializer
     queryset = Image.objects.all()
 
@@ -47,7 +59,7 @@ class ProductSingleView(RetrieveUpdateDestroyAPIView):
 
 class ProductView(ListCreateAPIView):
 
-    permission_classes = (IsReadOnlyOrAdmin,)
+    # permission_classes = (IsReadOnlyOrAdmin,)
 
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -56,5 +68,16 @@ class ProductView(ListCreateAPIView):
         category = get_object_or_404(Category, id=self.request.data.get('category'))
         return serializer.save(category=category)
 
+
+class CategoryListView(ListAPIView):
+    """Список категория с типами продуктов"""
+    queryset = Category.objects.all()
+    serializer_class = CategoryProductTypesSerializer
+
+
+class ProductTypeListView(ListAPIView):
+
+    queryset = ProductType.objects.all()
+    serializer_class = ProductTypeSerializer
 
 

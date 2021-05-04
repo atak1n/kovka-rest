@@ -3,8 +3,8 @@ from versatileimagefield.fields import VersatileImageField, PPOIField
 
 
 class Image(models.Model):
-    name = models.CharField(max_length=255)
-    image = VersatileImageField(
+    name = models.CharField(max_length=255, blank=True)
+    src = VersatileImageField(
         'Image',
         upload_to='images/',
         ppoi_field='image_ppoi'
@@ -12,34 +12,78 @@ class Image(models.Model):
     image_ppoi = PPOIField()
 
     def __str__(self):
-        return self.name
+        return self.src.name
 
 
 class Category(models.Model):
     """Категория товаров"""
-    name = models.CharField(max_length=200, db_index=True)
-    # slug = models.SlugField(max_length=200, db_index=True, unique=True)
+    title = models.CharField('название', max_length=150, db_index=True)
+    slug = models.SlugField(max_length=150, db_index=True, unique=True)
+    description = models.TextField('описание', max_length=400, blank=True)
+    price = models.CharField('цена', max_length=50)
+    image = models.ForeignKey(
+        Image,
+        verbose_name='изображение',
+        on_delete=models.DO_NOTHING,
+        related_name='category',
+        blank=True,
+        null=True
+    )
 
     class Meta:
-        ordering = ('name',)
+        # ordering = ('name',)
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class ProductType(models.Model):
     """Тип продуктов"""
-    pass
+    title = models.CharField('название', max_length=150, db_index=True)
+    slug = models.SlugField(max_length=150, db_index=True, unique=True)
+    category = models.ForeignKey(
+        Category,
+        related_name='product_types',
+        on_delete=models.CASCADE,
+        default=1
+    )
+    image = models.ForeignKey(
+        Image,
+        verbose_name='изображение',
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True
+    )
+
+    class Meta:
+        # ordering = ('title',)
+        verbose_name = 'тип продукта'
+        verbose_name_plural = 'типы продуктов'
+        index_together = (('id', 'slug'),)
+
+    def __str__(self):
+        return self.title
 
 
 class Product(models.Model):
     """Продукты"""
-    category = models.ManyToManyField(Category, related_name='products')
+    product_type = models.ForeignKey(
+        ProductType,
+        related_name='products',
+        on_delete=models.CASCADE,
+        default=1
+    )
     title = models.CharField('название', max_length=200, db_index=True)
-    description = models.TextField('описание', blank=True)
-    image = models.ManyToManyField(Image, verbose_name='картинки', related_name='images')
+    description = models.TextField('описание', max_length=300, blank=True)
+    image = models.ForeignKey(
+        Image,
+        verbose_name='изображение',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True
+    )
     price = models.DecimalField('цена', max_digits=10, decimal_places=2)
 
     # slug = models.SlugField(max_length=200, db_index=True)
@@ -49,7 +93,7 @@ class Product(models.Model):
     # updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ('title',)
+        # ordering = ('title',)
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
         # index_together = (('id', 'slug'),)

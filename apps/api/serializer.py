@@ -1,34 +1,57 @@
 from rest_framework import serializers
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 
-from .models import (Product, Category, Image)
+from .models import (Product, Category, Image, ProductType)
 
 
 class ImageSerializer(serializers.ModelSerializer):
-    image = VersatileImageFieldSerializer(
+    src = VersatileImageFieldSerializer(
         sizes=[
-            ('full_size', 'url'),
-            ('thumbnail', 'thumbnail__100x100'),
-        ]
+            ('full', 'url'),
+            ('preview', 'crop__400x300'),
+        ],
     )
 
     class Meta:
         model = Image
-        fields = ['id', 'name', 'image']
+        fields = ['id', 'name', 'src']
+
+
+class ProductSerializer(serializers.ModelSerializer):
+
+    image = ImageSerializer
+
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+
+class ProductTypeSerializer(serializers.ModelSerializer):
+
+    image = ImageSerializer()
+
+    class Meta:
+        model = ProductType
+        fields = '__all__'
+
+
+class CategoryProductTypesSerializer(serializers.ModelSerializer):
+
+    # image = ImageSerializer
+    product_types = ProductTypeSerializer(many=True)
+
+    class Meta:
+        model = Category
+        fields = ('id', 'title', 'description', 'product_types')
 
 
 class CategorySerializer(serializers.ModelSerializer):
+
+    # image = ImageSerializer
+    # product_types = ProductTypeSerializer(many=True)
 
     class Meta:
         model = Category
         fields = '__all__'
 
-
-class ProductSerializer(serializers.ModelSerializer):
-
-    image = ImageSerializer(many=True)
-
-    class Meta:
-        model = Product
-        fields = '__all__'
 
