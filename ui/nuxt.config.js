@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+const isDev = process.env.NODE_ENV !== 'production'
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -17,6 +18,9 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+
+  // mode: 'spa',
+  // ssr: false,
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -37,16 +41,20 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    'nuxtjs-mdi-font',
     '@nuxtjs/axios',
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    // customVariables: ['~/assets/variables.scss'],
     theme: {
       dark: true,
       themes: {
+        light: {
+          primary: '#F4511E',
+          secondary: '#050b1f',
+          accent: '#204165',
+        },
         dark: {
           primary: colors.blue.darken2,
           accent: colors.grey.darken3,
