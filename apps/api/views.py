@@ -1,3 +1,4 @@
+from django.db.models import Prefetch
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 from rest_framework.generics import (
     get_object_or_404,
@@ -17,7 +18,7 @@ from rest_framework.permissions import (
 from .models import Category, Product, Image, ProductType
 from .serializer import (
     CategoryProductTypesSerializer,
-    CategorySerializer,
+    # CategorySerializer,
     ProductSerializer,
     ImageSerializer,
     ProductTypeSerializer
@@ -27,13 +28,16 @@ from .serializer import (
 class CategoryViewSet(ModelViewSet):
 
     # permission_classes = (AllowAny,)
-    serializer_class = CategorySerializer
-    queryset = Category.objects.all()
+    serializer_class = CategoryProductTypesSerializer
+    queryset = Category.objects.all().prefetch_related(
+        Prefetch('product_types', queryset=ProductType.objects.select_related('image').all()),
+        Prefetch('product_types__products', queryset=Product.objects.select_related('image').all()),
+    )
 
 
 class ProductViewSet(ReadOnlyModelViewSet):
 
-    permission_classes = (AllowAny,)
+    # permission_classes = (AllowAny,)
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
 
@@ -47,7 +51,7 @@ class ImageViewSet(ReadOnlyModelViewSet):
 
 class ProductSingleView(RetrieveUpdateDestroyAPIView):
 
-    permission_classes = (AllowAny,)
+    # permission_classes = (AllowAny,)
 
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -72,17 +76,18 @@ class ProductView(ListCreateAPIView):
 class CategoryListView(ListAPIView):
     """Список категория с типами продуктов"""
     queryset = Category.objects.all().prefetch_related(
-        'product_types',
-        'product_types__image',
-        'product_types__products',
-        'product_types__products__image',
+        Prefetch('product_types', queryset=ProductType.objects.select_related('image').all()),
+        Prefetch('product_types__products', queryset=Product.objects.select_related('image').all()),
     )
     serializer_class = CategoryProductTypesSerializer
 
 
 class CategoryDetail(RetrieveAPIView):
     """Детализация категории вместе с типами продуктов и продуктами"""
-    queryset = ProductType.objects.all()
+    queryset = Category.objects.all().prefetch_related(
+        Prefetch('product_types', queryset=ProductType.objects.select_related('image').all()),
+        Prefetch('product_types__products', queryset=Product.objects.select_related('image').all()),
+    )
     serializer_class = CategoryProductTypesSerializer
 
 
@@ -91,21 +96,6 @@ class ProductTypeListView(ListAPIView):
     queryset = ProductType.objects.all()
     serializer_class = ProductTypeSerializer
 
-
-class ProductTypeDetail(RetrieveAPIView):
-
-    queryset = ProductType.objects.all()
-    serializer_class = ProductSerializer
-
-    def get_object(self):
-        queryset = self.get_queryset()
-        # filter = {}
-        # for field in self.multiple_lookup_fields:
-        #     filter[field] = self.kwargs[field]
-
-        obj = get_object_or_404(queryset, id=self.request.data.get('pk'))
-        obj.select_related('')
-        return obj
 
 
 
