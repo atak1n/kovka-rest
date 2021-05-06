@@ -20,6 +20,7 @@
       <v-toolbar-title class=" v-card--link" @click="$router.push({path: '/'})">
         {{ companyName }}
       </v-toolbar-title>
+
       <v-spacer />
 
       <BtnSocialList v-show="!isMobile"/>
@@ -27,7 +28,6 @@
       <v-spacer />
 
       <div>
-
         <v-tabs
           class="hidden-sm-and-down"
           optional
@@ -69,18 +69,16 @@
 </template>
 
 <script>
-import store from "@/myStore"
+import { mapState } from 'vuex'
 import BtnSocialList from "~/components/BtnSocialList"
-
-
+import HomeDrawer from './Drawer'
 
 export default {
   name: 'HomeAppBar',
 
   components: {
     BtnSocialList,
-    HomeDrawer: () => import('./Drawer'),
-
+    HomeDrawer,
   },
 
   data: () => ({
@@ -109,13 +107,17 @@ export default {
       },
 
     ],
-    companyName: store.company.name,
-    phone: store.contacts.phoneNumbers.main,
+    // companyName: store.company.name,
+    // phone: store.contacts.phoneNumbers.main,
   }),
   computed: {
     isMobile() {
       return this.$vuetify.breakpoint.mobile
     },
+    ...mapState({
+      companyName: state => state.company.name,
+      phone: state => state.contacts.phoneNumbers.main,
+    })
   }
 }
 </script>

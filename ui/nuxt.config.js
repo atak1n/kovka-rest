@@ -19,7 +19,7 @@ export default {
     ]
   },
 
-  // mode: 'spa',
+  mode: 'spa',
   // ssr: false,
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -31,7 +31,13 @@ export default {
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
+  // components: [
+  //   '~/components',
+  //   { path: '~/components/base/', prefix: 'base' }
+  // ],
+
   components: true,
+
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -48,7 +54,7 @@ export default {
   vuetify: {
     // customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         light: {
           primary: '#F4511E',

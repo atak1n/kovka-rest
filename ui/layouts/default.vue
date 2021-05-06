@@ -1,7 +1,7 @@
 <template>
   <v-app>
 
-    <CoreAppBar />
+    <HomeAppBar />
 
 <!--    <ProductsBar />-->
 
@@ -20,12 +20,12 @@
 <script>
 
 export default {
-  // components: {
-    // HomeAppBar: () => import('~/components/core/AppBar.vue'),
+  components: {
+    HomeAppBar: () => import('~/components/core/AppBar.vue'),
     // HomeFooter: () => import('~/components/core/Footer'),
     // ProductsBar: () => import('~/components/core/AppProductsBar'),
     // GoToTopBtn: () => import('~/components/core/GoToTopBtn')
-  // },
+  },
 
   scrollToTop: true,
 }
