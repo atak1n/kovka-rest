@@ -38,7 +38,7 @@ import { mapState } from 'vuex'
       ...mapState({
         title: state => state.services.title,
         annotate: state => state.services.annotate,
-        services: state => state.services.services,
+        services: state => state.services.servicesList,
       })
     },
 
