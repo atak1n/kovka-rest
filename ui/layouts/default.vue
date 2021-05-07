@@ -27,6 +27,10 @@ export default {
     // GoToTopBtn: () => import('~/components/core/GoToTopBtn')
   },
 
+  async fetch() {
+    await this.$store.dispatch('testProducts/getProducts')
+  },
+
   scrollToTop: true,
 }
 </script>

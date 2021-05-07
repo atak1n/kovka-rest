@@ -1,5 +1,5 @@
 <template>
-  <section id="home">
+  <div id="home">
     <v-row no-gutters>
 
       <v-col cols="12">
@@ -19,15 +19,14 @@
       </v-col>
 
       <v-col cols="12">
-<!--        <info />-->
+        <info />
       </v-col>
 
     </v-row>
-  </section>
+  </div>
 </template>
 
 <script>
-  // import pagesMeta from "@/myStore/pagesMeta"
 
   export default {
     name: "index",
@@ -36,7 +35,7 @@
       Projects: () => import('~/components/sections/Projects.vue'),
       Services: () => import('~/components/sections/Services.vue'),
       ContactUs: () => import('~/components/sections/ContactUs.vue'),
-      // Info: () => import('~/components/sections/Info.vue'),
+      Info: () => import('~/components/sections/Info.vue'),
 
     },
 

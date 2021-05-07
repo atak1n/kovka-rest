@@ -4,18 +4,18 @@
     :style="styles"
     v-on="$listeners"
   >
+    <div>
     <slot />
+    </div>
   </section>
 </template>
 
 <script>
   // Components
-  // с данным экспортом не работал серверный рендер, но
-  // его удаление не повлияло на макет (вроле бы)
   // import Measurable from 'vuetify/lib/mixins/measurable'
 
   export default {
-    name: 'BaseSection',
+    name: 'BaseCustomSection',
 
     // mixins: [Measurable],
 

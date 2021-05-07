@@ -15,13 +15,13 @@
             width="100%"
           >
             <!--          <base-heading title="ФЕНИКС СТАЛЬНЫЕ РЕШЕНИЯ" />-->
-            <base-heading space="1"><span>{{ company.name }}</span></base-heading>
+            <base-heading space="1"><span>{{ name }}</span></base-heading>
             <base-heading space="1">
-              <p class="font-weight-light text-h5">{{ company.slogan }}</p>
+              <p class="font-weight-light text-h5">{{ slogan }}</p>
             </base-heading>
 
             <base-heading space="1">
-              <p class="base-body body-1 light--text  text-left">{{ company.about }}</p>
+              <p class="base-body body-1 light--text  text-left">{{ about }}</p>
             </base-heading>
 
 
@@ -34,31 +34,35 @@
 </template>
 
 <script>
-import store from "~/myStore"
-import BaseHeading from "~/components/base/Heading";
+import {mapState} from 'vuex'
 
 export default {
   name: 'SectionHero',
-  components: {BaseHeading},
   provide: {
     theme: { isDark: true },
   },
 
   data: () => ({
-    contacts: {...store.contacts},
-    company: {...store.company},
+    // contacts: {...store.contacts},
+    // company: {...store.company},
   }),
   methods: {
-    getHref(contact) {
-      return `${contact.href}${contact.link}`
-    }
+    // getHref(contact) {
+    //   return `${contact.href}${contact.link}`
+    // }
   },
   computed: {
     minHeight () {
       const height = this.$vuetify.breakpoint.mdAndUp ? '50vh' : '50vh'
-
       return `calc(${height} + ${this.$vuetify.application.top}px)`
     },
+    ...mapState({
+      // contacts: state => state.contacts.contacts,
+      name: state => state.company.name,
+      slogan: state => state.company.slogan,
+      about: state => state.company.about,
+
+    })
 
     // heroHeight() {
     //

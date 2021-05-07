@@ -1,5 +1,5 @@
 export const state = () => ({
-    phoneNumbers: {
+  phoneNumbers: {
     title: 'Телефоны',
     phones: [
       '8(499) 964 66 67',
