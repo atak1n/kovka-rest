@@ -1,7 +1,7 @@
 <template>
   <v-app>
 
-    <HomeAppBar />
+    <core-app-bar />
 
 <!--    <ProductsBar />-->
 
@@ -21,7 +21,7 @@
 
 export default {
   components: {
-    HomeAppBar: () => import('~/components/core/AppBar.vue'),
+    // HomeAppBar: () => import('~/components/core/AppBar.vue'),
     // HomeFooter: () => import('~/components/core/Footer'),
     // ProductsBar: () => import('~/components/core/AppProductsBar'),
     // GoToTopBtn: () => import('~/components/core/GoToTopBtn')

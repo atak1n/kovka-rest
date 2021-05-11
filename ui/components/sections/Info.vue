@@ -46,11 +46,11 @@
 
 <script>
   export default {
-    name: 'SectionBusinessInfo',
+    name: 'SectionInfo',
 
     components: {
       // InfoFeatures: () => import('@/components/InfoFeatures'),
-      // SocialNetworks: () => import('@/components/SocialNetworks'),
+      // SocialNetworks: () => import('~/components/SocialNetworks'),
     },
   }
 </script>

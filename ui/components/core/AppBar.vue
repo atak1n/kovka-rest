@@ -9,7 +9,7 @@
       extension-height="28"
     >
       <base-img
-        :src="require('@/assets/egg-logo.png')"
+        :src="require('~/assets/egg-logo.png')"
         contain
         max-width="60"
         class="mr-3 v-card--link"

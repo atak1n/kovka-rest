@@ -59,7 +59,7 @@
 
 <script>
   // Mixins
-  import Heading from '@/mixins/heading'
+  import Heading from '~/mixins/heading'
 
   export default {
     name: 'BaseInfoCard',
