@@ -40,10 +40,11 @@ class CategoryProductTypesSerializer(serializers.ModelSerializer):
 
     # image = ImageSerializer
     product_types = ProductTypeSerializer(many=True)
+    image = ImageSerializer()
 
     class Meta:
         model = Category
-        fields = ('id', 'slug', 'title', 'description', 'price', 'product_types')
+        fields = ('id', 'slug', 'title', 'description', 'price', 'image', 'product_types')
 
 
 class CategorySerializer(serializers.ModelSerializer):

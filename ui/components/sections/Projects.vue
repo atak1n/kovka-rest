@@ -16,6 +16,7 @@
 
           >
             <base-gallery-card
+              subtitle
               v-bind="project"
               :width="mobile ? 400 : 300"
               @click="openCard(project)"
@@ -76,7 +77,7 @@ export default {
   data() {
     return {
       dialog: false,
-      projects: [],
+      // projects: [],
       activeGroup: [],
     }
   },
@@ -98,18 +99,27 @@ export default {
     },
 
     ...mapState({
-      products: state => state.products.products,
+      products: state => state.projects.products,
       annotate: state => state.projects.annotate,
       title: state => state.projects.title,
-    })
+
+      testProducts: state => state.testProducts.products
+    }),
+    projects() {
+      return this.testProducts.filter(
+        project => this.products.find(
+          product => product === project.slug
+        )
+      )
+    },
 
   },
   created() {
-    this.projects = this.products.filter(
-      product => this.$store.state.projects.products.find(
-        projectsProduct => projectsProduct === product.slug
-      )
-    )
+    // this.projects = this.products.filter(
+    //   product => this.$store.state.testProducts.products.find(
+    //     projectsProduct => projectsProduct === product.slug
+    //   )
+    // )
   }
 }
 </script>

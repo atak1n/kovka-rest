@@ -29,7 +29,7 @@ class CategoryViewSet(ModelViewSet):
 
     # permission_classes = (AllowAny,)
     serializer_class = CategoryProductTypesSerializer
-    queryset = Category.objects.all().prefetch_related(
+    queryset = Category.objects.all().select_related('image').prefetch_related(
         Prefetch('product_types', queryset=ProductType.objects.select_related('image').all()),
         Prefetch('product_types__products', queryset=Product.objects.select_related('image').all()),
     )

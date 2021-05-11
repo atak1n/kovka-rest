@@ -8,8 +8,8 @@
     v-on="$listeners"
   >
     <v-img
-      v-if="img.preview"
-      :src="require(`@/assets/${img.preview}`)"
+      v-if="image.src.preview"
+      :src="image.src.preview"
       height="100%"
       gradient="rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)"
       class="align-end"
@@ -43,7 +43,7 @@ export default {
       type: [Number, String],
       default: 270
     },
-    img: {
+    image: {
       type: Object,
     },
 
