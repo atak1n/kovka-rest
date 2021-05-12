@@ -76,8 +76,6 @@
 
 <script>
   import axios from 'axios'
-  import store from "~/myStore";
-  // import contacts from "@/store/contacts";
 
   export default {
     name: 'BaseContactForm',
@@ -93,7 +91,6 @@
       },
     },
     data: () => ({
-      contacts: store.contacts,
       valid: false,
       form: {
         name: '',
@@ -167,6 +164,10 @@
           .catch(() =>  this.snackbarError())
       }
     },
-    computed: {}
+    computed: {
+      contacts() {
+        return this.$store.state.contacts
+      }
+    }
   }
 </script>

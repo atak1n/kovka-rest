@@ -99,16 +99,16 @@ export default {
     },
 
     ...mapState({
-      products: state => state.projects.products,
+      categories: state => state.projects.categories,
       annotate: state => state.projects.annotate,
       title: state => state.projects.title,
 
-      testProducts: state => state.testProducts.products
+      products: state => state.products.products
     }),
     projects() {
-      return this.testProducts.filter(
-        project => this.products.find(
-          product => product === project.slug
+      return this.products.filter(
+        product => this.categories.find(
+          category => category === product.slug
         )
       )
     },

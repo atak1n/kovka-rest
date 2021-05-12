@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import products from "@/myStore/products";
+import { mapState } from 'vuex'
 
 export default {
   name: "AppProductsBar",
@@ -78,13 +78,19 @@ export default {
     drawer: null,
     mini: true,
 
-    title: products.title,
-    annotate: products.annotate,
-    products: products.products,
+    // title: products.title,
+    // annotate: products.annotate,
+    // products: products.products,
     showMobileDrawer: false,
 
   }),
   computed: {
+    ...mapState({
+      title: state => state.products.title,
+      annotate: state => state.products.annotate,
+      products: state => state.products.products,
+    }),
+
     bottomOffset() {
       return `height: ${this.$vuetify.application.bottom}px; position: fixed`
     },

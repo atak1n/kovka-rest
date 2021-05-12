@@ -2,7 +2,7 @@ export const state = () => ({
   title: 'Примеры работ',
   annotate: '',
 
-  products: [
+  categories: [
     'perila',
     'mangal',
     'navesi',
