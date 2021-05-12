@@ -3,8 +3,9 @@
   <v-card
     v-bind="$attrs"
     v-on="$listeners"
+    :height="height"
+    :width="width"
     class="mx-auto fill-height"
-
 >
 <!--  <div class="pa-2">-->
 
@@ -15,13 +16,13 @@
 <!--    />-->
 
 <!--</div>-->
-    <v-card-subtitle class="text--lighten-3" v-text="value.title"/>
+    <v-card-subtitle class="text--lighten-3" v-text="title"/>
   </v-card>
 </template>
 
 <script>
 export default {
-  name: "GalleryCard",
+  name: "TitleCard",
 
   props: {
     height: {
@@ -33,13 +34,13 @@ export default {
       type: [Number, String],
       default: 270
     },
-    value: {
-      type: Object,
-      default: () => ({}),
-    },
+    // value: {
+    //   type: Object,
+    //   default: () => ({}),
+    // },
     title: {
-      type: Boolean,
-      default: false
+      type: String,
+      // default: false
     },
     subtitle: {
       type: Boolean,
