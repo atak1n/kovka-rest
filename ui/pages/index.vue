@@ -41,8 +41,18 @@
 
     // scrollToTop: true,
 
-    // вернуть когда все починим
-    // head: { ...pagesMeta.home }
+    head() {
+      return {
+        // meta: this.homeMeta.meta,
+        // title: this.homeMeta.title
+        ...this.homeMeta
+      }
+    },
+    computed: {
+      homeMeta() {
+        return this.$store.state.pagesMeta.home
+      }
+    }
   }
 </script>
 

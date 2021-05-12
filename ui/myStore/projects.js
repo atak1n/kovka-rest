@@ -8,7 +8,8 @@ const projects = {
     'navesi',
     'ograda',
     'vorota',
-    'lustra'
+    'lustra',
+
   ]
 
 }

@@ -39,7 +39,7 @@
               <v-carousel-item
                 v-for="(project, i) in activeGroup"
                 :key="i"
-                :src="require(`@/assets/${project.img.original}`)"
+                :src="project.image.src.full"
                 contain
 
               >
@@ -88,7 +88,7 @@ export default {
     },
     setActiveGroupItems(project) {
       const products = []
-      project.types.forEach( product => products.push(...product.products) )
+      project.product_types.forEach( product => products.push(...product.products) )
       this.activeGroup = products
     },
   },
@@ -114,13 +114,13 @@ export default {
     },
 
   },
-  created() {
+  // created() {
     // this.projects = this.products.filter(
     //   product => this.$store.state.testProducts.products.find(
     //     projectsProduct => projectsProduct === product.slug
     //   )
     // )
-  }
+  // }
 }
 </script>
 

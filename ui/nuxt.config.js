@@ -4,15 +4,15 @@ const isDev = process.env.NODE_ENV !== 'production'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - kovka-mo.ru',
-    title: 'kovka-mo.ru',
+    // titleTemplate: '%s - kovka-mo.ru',
+    // title: 'kovka-mo.ru',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'ru'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      // { hid: 'description', name: 'description', content: '' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -28,6 +28,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/ymapPlugin.js', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

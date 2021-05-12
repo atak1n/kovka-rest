@@ -1,7 +1,7 @@
 <template>
   <v-app>
 
-    <core-app-bar />
+    <CoreAppBar />
 
 <!--    <ProductsBar />-->
 
@@ -13,19 +13,13 @@
       </v-fade-transition>
     </v-main>
 
-<!--    <home-footer/>-->
+    <CoreFooter/>
   </v-app>
 </template>
 
 <script>
 
 export default {
-  components: {
-    // HomeAppBar: () => import('~/components/core/AppBar.vue'),
-    // HomeFooter: () => import('~/components/core/Footer'),
-    // ProductsBar: () => import('~/components/core/AppProductsBar'),
-    // GoToTopBtn: () => import('~/components/core/GoToTopBtn')
-  },
 
   async fetch() {
     await this.$store.dispatch('testProducts/getProducts')

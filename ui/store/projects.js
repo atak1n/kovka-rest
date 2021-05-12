@@ -8,7 +8,8 @@ export const state = () => ({
     'navesi',
     'ograda',
     'vorota',
-    'lustra'
+    'lustra',
+    'kalitki',
   ]
 
 })
