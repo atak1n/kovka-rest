@@ -126,7 +126,6 @@
 </template>
 
 <script>
-  import store from "~/myStore"
 
   export default {
     name: "FenixBusinessContact",
@@ -137,9 +136,9 @@
       title: String,
     },
 
-    data: () => ({
-      contacts: store.contacts,
-    }),
+    // data: () => ({
+    //   contacts: store.contacts,
+    // }),
     computed: {
       mobile() {
         return this.$vuetify.breakpoint.mobile
@@ -150,6 +149,9 @@
         } else {
           return 'text-decoration-none grey--text text--darken-1'
         }
+      },
+      contacts() {
+        return this.$store.state.contacts
       }
     }
   }

@@ -6,8 +6,8 @@ import services from "./services"
 import features from "./features"
 import projects from "./projects"
 import gallery from "./gallery"
-import pagesMeta from "@/myStore/pagesMeta"
-import products from "@/myStore/products";
+import pagesMeta from "./pagesMeta"
+import products from "./products";
 
 
 
@@ -43,4 +43,4 @@ const store = new Vue({
 })
 
 
-export default store
+// export default store

@@ -31,7 +31,7 @@
 </template>
 
 <script>
-  import store from "~/myStore";
+  // import store from "~/myStore";
 
   export default {
     name: 'BaseInfo',
@@ -44,8 +44,8 @@
     data: () => ({
       logo: 'egg-logo-192.png',
       // logo: store.company.logo,
-      company: store.company,
-      contacts: store.contacts,
+      // company: store.company,
+      // contacts: store.contacts,
 
       business: [
         {
@@ -66,5 +66,13 @@
       ],
 
     }),
+    computed: {
+      company() {
+        return this.$store.state.company;
+      },
+      contacts() {
+        return this.$store.state.contacts;
+      }
+    }
   }
 </script>

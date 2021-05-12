@@ -45,7 +45,7 @@
   import {
     HexToRGBA,
     RGBAtoCSS,
-  } from 'vuetify/lib/util/colorUtils.js'
+  } from 'vuetify/lib/util/colorUtils'
 
   export default {
     name: 'SectionHeroAlt',
